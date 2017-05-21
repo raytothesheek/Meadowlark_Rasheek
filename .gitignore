@@ -1,0 +1,8 @@
+#ignore packages installed by npm 
+node_modules 
+#ignore backup files 
+*~
+#Only needed for mac 
+.DS_Store
+#put any other files you dont want o check in here 
+# such as .DS_Store (OSX), *.back, etc. 
