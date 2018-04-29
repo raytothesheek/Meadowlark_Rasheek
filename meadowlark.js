@@ -1,16 +1,11 @@
-var fortunes  = [
-	"Conquer your fears or they will conquer you. ", 
-	"Rivers need springs. ", 
-	"Do not fear what you don't know", 
-	"You will have a pleasant surprise. ", 
-	"Whenever possible, keep it simple"
-]; 
 
 
 //EXPRESS SETUP
 //------------------------------
 //creating an express variable
 var express = require('express'); 
+//Specifying imports at the top of the page 
+var fortune = require('./lib/fortune.js');
 //app using the express framework 
 var app= express(); 
 //------------------------------
@@ -35,16 +30,22 @@ app.use(express.static(__dirname + '/public'));
 //access port on localhost:3000 
 app.set('port', process.env.PORT || 3000); 
 
+//middleware to detect test=1 in the querystring. it must appear before routes are defined
+//basically this code says that if we are not running on a production server and if querystring = (test=1)
+app.use(function(req, res, next){
+	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1'; 
+	next(); 
+})
+
 app.get('/', function(req, res){
 	res.render('home'); 
 }); 
 
-app.get('/about', function(req, res) {
-	//get a random value 
-	var randomFortune = fortunes[Math.floor(Math.random()* fortunes.length)];
-	//check out debug 
-	console.log(randomFortune);  
-	res.render('about'); 
+app.get('/about', function(req, res) { 
+	res.render('about', {
+		fortune: fortune.getFortune(), 
+		pageTestScript: '/qa/tests-about.js'
+	}); 
 });
 
 
