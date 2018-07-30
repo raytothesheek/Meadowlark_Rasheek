@@ -1,5 +1,5 @@
 
-
+//Figure out whats wrong with the debug 
 //EXPRESS SETUP
 //------------------------------
 //creating an express variable
@@ -7,7 +7,8 @@ var express = require('express');
 //Specifying imports at the top of the page 
 var fortune = require('./lib/fortune.js');
 //app using the express framework 
-var app= express(); 
+var app= express();
+
 //------------------------------
 
 
@@ -17,6 +18,8 @@ var app= express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.engine('handlebars', handlebars.engine); 
 app.set('views', __dirname+'/views/layouts');
+//print out the console log. 
+console.log(__dirname+'/views/layouts')
 app.set('view engine', 'handlebars'); 
 //------------------------------
 
@@ -36,6 +39,14 @@ app.use(function(req, res, next){
 	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1'; 
 	next(); 
 })
+
+app.get('/tours/hood-river', function(req, res){
+	res.render('tours/hood-river'); 
+}); 
+
+app.get('/tours/request-group-rate', function(req, res){
+	res.render('tours/request-group-rate'); 
+}); 
 
 app.get('/', function(req, res){
 	res.render('home'); 

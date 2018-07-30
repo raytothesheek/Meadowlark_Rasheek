@@ -9,11 +9,12 @@
   "author": "Rasheek Noor",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1",
     "express-handlebars": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.4.2"
+    "express": "^4.16.3",
+    "mocha": "^5.2.0",
+    "zombie": "^6.1.2"
   }
 }
