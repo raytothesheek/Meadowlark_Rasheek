@@ -24,6 +24,9 @@ app.set('view engine', 'handlebars');
 //------------------------------
 
 
+//Setup Morgan middleware to log 
+app.use(require('morgan')('dev'));
+
 //Express relies on middlware to handle static files and views. 
 //The static middleare allows you to designate one or more directories as containing static resources 
 // We use a public directory because anything in the public folder will be served to the client without question 
